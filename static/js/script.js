@@ -7,7 +7,7 @@ window.parseISOString = function parseISOString(s) {
 if (document.getElementById("venue-form") != null){
   document.getElementById("venue-form").addEventListener('submit', function(e){
   e.preventDefault();
-  // document.getElementById("venue-form")=form;
+  var fyyur_success = false;
   fetch('/venues/create', {
         method: 'POST',
         body: JSON.stringify({
@@ -24,14 +24,19 @@ if (document.getElementById("venue-form") != null){
           'Content-Type': 'application/json'
         }
       })
-        .then(function (response) {
-          return response.json();
-        })
-        .catch(function () {
-          console.log('has-error');
-        }).finally(function () {
-          console.log('Venue created');          
-        });
+      .then(function (response) {
+        fyyur_success = true;
+        return response.json();
+      })
+      .catch(function () {
+        console.log('has-error');
+      }).finally(function () {
+        console.log('Venue created');
+        if(fyyur_success){
+          window.location.href ='/venues';
+        }
+                 
+      });
     
 });
 }
@@ -39,6 +44,7 @@ if (document.getElementById("venue-form") != null){
 
 if (document.getElementById("venue-form-edit") != null){
 document.getElementById('venue-form-edit').addEventListener('submit',function(e){
+  var fyyur_success = false;
   e.preventDefault();
   venueId = document.getElementById('edit-button-venue').getAttribute('data-id');
   // document.getElementById('venue-form-edit')=form;
@@ -59,6 +65,16 @@ document.getElementById('venue-form-edit').addEventListener('submit',function(e)
     headers: {
       'Content-Type': 'application/json'
     }
+  })
+  .then(function (response) {
+    fyyur_success = true;
+    return response.json();
+  })
+  .finally(function(){
+    if(fyyur_success){
+      window.location.href ='/venues';
+    }
+    
   });
 
 });
@@ -66,6 +82,7 @@ document.getElementById('venue-form-edit').addEventListener('submit',function(e)
 
 if (document.getElementById("artist-form") != null){
   document.getElementById("artist-form").addEventListener('submit', function(e){
+    var fyyur_success = false;
     e.preventDefault();
     fetch('/artists/create', {
       method: 'POST',
@@ -85,10 +102,17 @@ if (document.getElementById("artist-form") != null){
       }
     })
       .then(function (response) {
+       fyyur_success = true;
         return response.json();
       })
       .catch(function () {
         console.log('has-error');
+      })
+      .finally(function(){
+        if(fyyur_success){
+          window.location.href ='/artists';
+        }
+        
       })
   
   });
@@ -97,6 +121,7 @@ if (document.getElementById("artist-form") != null){
 if (document.getElementById("artist-form-edit") != null){
   document.getElementById("artist-form-edit").addEventListener('submit', function(e){
     e.preventDefault();
+    var fyyur_success = false;
     artistId = document.getElementById('edit-button-artist').getAttribute('data-id');
     fetch('/artists/'+artistId+'/edit', {
       method: 'POST',
@@ -113,32 +138,51 @@ if (document.getElementById("artist-form-edit") != null){
       headers: {
         'Content-Type': 'application/json'
       }
-    }).then(function(){
-        window.location.href('/pages/artists.html');
     })
-  })
+    .then(function (response) {
+      fyyur_success = true;
+      return response.json();
+    })
+    .finally(function(){
+      if(fyyur_success){
+        window.location.href ='/artists';
+      }
+    }) 
+  });
 }
 
-function createShow(){
+if (document.getElementById("show-form") != null){
+  document.getElementById("show-form").addEventListener('submit', function(e){
+    var fyyur_success = false;
+    e.preventDefault();
+    fetch('/shows/create',{
+      method : 'POST',
+      body : JSON.stringify({
+        'artist_id' : document.getElementById("show-form").artist_id.value,
+        'venue_id' : document.getElementById("show-form").venue_id.value,
+        'start_time' : document.getElementById("show-form").start_time.value
+      }),
+      headers: {
+        'Content-Type' : 'application/json'
+      }
+    })
+    .then(function(response){
+      fyyur_success = true;
+      return response.json();
+    })
+    .catch(function(){
+      console.log('has-error');
+    })
+    .finally(function(){
+      if(fyyur_success){
+        window.location.href ='/shows';
+      }
+    }) 
   
-  fetch('/shows/create',{
-    method : 'POST',
-    body : JSON.stringify({
-      'artist_id' : document.getElementById("form").artist_id.value,
-      'venue_id' : document.getElementById("form").venue_id.value,
-      'start_time' : document.getElementById("form").start_time.value
-    }),
-    headers: {
-      'Content-Type' : 'application/json'
-    }
-  })
-  .then(function(response){
-    return response.json();
-  })
-  .catch(function(){
-    console.log('has-error');
-  })
+  }); 
 }
+
+
 
 function deleteBtn(){
   

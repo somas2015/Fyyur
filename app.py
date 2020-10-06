@@ -30,15 +30,6 @@ from flask_migrate import Migrate
 import sys
 from model import Venue,Artist,Shows,app,moment,migrate,db 
 
-
-#----------------------------------------------------------------------------#
-# App Config.
-#----------------------------------------------------------------------------#
-
-
-
-    # TODO: implement any missing fields, as a database migration using Flask-Migrate
-
 # TODO Implement Show and Artist models, and complete all model relationships and properties, as a database migration.
 
 #----------------------------------------------------------------------------#
