@@ -1,0 +1,27 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Fyyur | Venues{% endblock %}
+{% block content %}
+{% for area in areas | groupby('state') %}
+	{% for cities in area.1 | groupby('city')%}
+		<h3>{{ area.0 }},{{ cities.0 }}</h3>
+		
+			<ul class="items">
+				{% for venues in cities.1 %}
+				<li>
+					
+					<a href="/venues/{{ venues.id }}">
+						<i class="fas fa-music"></i>
+						<div class="item" style="display: inline-flex;">
+							<h5  style="padding-right: 50px;">{{ venues.name }}</h5>									
+						
+						</div>
+
+					</a>
+					
+					
+				</li>
+				{% endfor %}
+			</ul>
+	{% endfor %}
+{% endfor %}
+{% endblock %}
