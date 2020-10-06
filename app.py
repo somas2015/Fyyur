@@ -35,61 +35,7 @@ from model import Venue,Artist,Shows,app,moment,migrate,db
 # App Config.
 #----------------------------------------------------------------------------#
 
-# app = Flask(__name__)
-# moment = Moment(app)
-# app.config.from_object('config')
-# db = SQLAlchemy(app)
-# migrate = Migrate(app,db)
-# # TODO: connect to a local postgresql database
 
-# #----------------------------------------------------------------------------#
-# # Models.
-# #----------------------------------------------------------------------------#
-# Base = declarative_base()
-
-
-# class Venue(db.Model,Base):
-#     __tablename__ = 'Venue'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String)
-#     city = db.Column(db.String(120))
-#     state = db.Column(db.String(120))
-#     address = db.Column(db.String(120))
-#     phone = db.Column(db.String(120))
-#     image_link = db.Column(db.String(500))
-#     facebook_link = db.Column(db.String(500))
-#     seeking_talent = db.Column(db.Boolean(), default=False, nullable=True)
-#     seeking_description = db.Column(db.String(500))
-    
-#     # TODO: implement any missing fields, as a database migration using Flask-Migrate
-
-# class Artist(db.Model,Base):
-#     __tablename__ = 'Artist'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String)
-#     city = db.Column(db.String(120))
-#     state = db.Column(db.String(120))
-#     phone = db.Column(db.String(120))
-#     genres = db.Column(db.String(120))
-#     image_link = db.Column(db.String(500))
-#     facebook_link = db.Column(db.String(120))
-#     Artists = db.relationship("Shows")
-
-# class Shows(db.Model,Base):
-#     __tablename__ = 'Shows'
-
-#     id = db.Column(db.Integer, primary_key=True)
-#     artist_id = db.Column(db.Integer, db.ForeignKey('Artist.id'), nullable = False)
-#     venue_id = db.Column(db.Integer, db.ForeignKey("Venue.id",ondelete='SET NULL'), nullable = False)   
-#     start_time = db.Column(db.DateTime(timezone=True), nullable=False)
-#     venues = db.relationship("Venue",backref=db.backref("venues", passive_deletes=True,cascade="all, delete-orphan"))
-
-#     def __repr__(self):
-#             return '<Shows {}>'.format(self.venue_id)
-        
-# db.create_all()
 
     # TODO: implement any missing fields, as a database migration using Flask-Migrate
 
